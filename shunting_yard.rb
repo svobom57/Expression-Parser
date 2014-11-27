@@ -63,7 +63,6 @@ while i <= expression.length - 1
 	end
 	i += 1
 end
-p input
 # Performs Shunting-yard algorithm
 output = []
 stack = []
