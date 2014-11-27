@@ -41,7 +41,7 @@ class ShuntingYard
 						output << pop
 					end
 				else
-					if OPERATORS.has_key?(token.intern)
+					if OPERATORS.key?(token.intern)
 						loop do
 							length = stack.length
 							if length == 0 || stack[length-1] == '('
