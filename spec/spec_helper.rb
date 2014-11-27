@@ -11,6 +11,7 @@ require './lib/Expressions/less_than_equal'
 require './lib/Expressions/and'
 require './lib/Expressions/or'
 require './lib/Expressions/unary_minus'
+require './lib/Expressions/not_equal'
 require './lib/abstract_syntax_tree_builder'
 
 RSpec.configure do |config|

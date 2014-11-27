@@ -33,6 +33,10 @@ describe AbstractSyntaxTreeBuilder do
 		returns %w(materiál 180 ||), Or.new('materiál', '180')
 	end
 
+	it '!= case' do
+		returns %w(materiál 180 !=), NotEqual.new('materiál', '180')
+	end
+
 	it '- case' do
 		returns %w(180 -), UnaryMinus.new('180')
 	end
