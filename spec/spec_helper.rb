@@ -10,7 +10,7 @@ require './lib/Expressions/and'
 require './lib/Expressions/or'
 require './lib/Expressions/arity1_operators'
 require './lib/Expressions/unary_minus'
-require './lib/binary_tree_builder'
+require './lib/abstract_syntax_tree_builder'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
