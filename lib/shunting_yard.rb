@@ -7,18 +7,18 @@ LEFT_BRACKET = 2
 RIGHT_BRACKET = 3
 # Operators and their precedence. The higher the number the lower the priority
 operators = {
-		'-' => 3, # unary minus
-		'>' => 8,
-		'>=' => 8,
-		'<' => 8,
-		'<=' => 8,
-		'=' => 9,
-		'&&' => 13,
-		'||' => 14,
+		:'-' => 3, # unary minus
+		:'>' => 8,
+		:'>=' => 8,
+		:'<' => 8,
+		:'<=' => 8,
+		:'=' => 9,
+		:'&&' => 13,
+		:'||' => 14,
 }.freeze
-expression = ' material = drevo && ( cena>= 180 || cena <= 250) '.strip.gsub(/[ ]/, '')
+#expression = ' material = drevo && ( cena>= 180 || cena <= 250) '.strip.gsub(/[ ]/, '')
 #expression = ' ()((cena = -150))()'.strip.gsub(/[ ]/, '')
-#expression = '-A = 150 || B && C'.strip.gsub(/[ ]/, '')
+expression = '-A = 150 || B && C'.strip.gsub(/[ ]/, '')
 #expression = '(A || -B) && C'.strip.gsub(/[ ]/, '')
 input = []
 start = 0
@@ -37,7 +37,7 @@ while i <= expression.length - 1
 		start = i+1
 		# Checking whether there is a longer operator coming
 		# Correctly this should be done by iteration from LONGEST_OP_LENGTH.downto(1)
-		if operators.has_key?(expression[i, LONGEST_OP_LENGTH])
+		if operators.has_key?(expression[i, LONGEST_OP_LENGTH].intern)
 			operator = expression[i, LONGEST_OP_LENGTH]
 			input << operator
 			i += 1
@@ -50,7 +50,7 @@ while i <= expression.length - 1
 			elsif operator == ')'
 				input << operator
 			else
-				raise("Unknown operator: #{operator}") unless operators.has_key?(operator)
+				raise("Unknown operator: #{operator}") unless operators.has_key?(operator.intern)
 				input << operator
 			end
 		end
@@ -83,7 +83,7 @@ input.each do |token|
 				output << pop
 			end
 		else
-			if operators.has_key?(token)
+			if operators.has_key?(token.intern)
 				loop do
 					length = stack.length
 					if length == 0 || stack[length-1] == '('
@@ -91,7 +91,7 @@ input.each do |token|
 						break
 					end
 					# Token has higher priority than top of stack
-					if operators[token] < operators[stack[length-1]]
+					if operators[token.intern] < operators[stack[length-1].intern]
 						stack << token
 						break
 					else
