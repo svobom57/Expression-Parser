@@ -1,6 +1,6 @@
 require './lib/token_parser'
 require './lib/shunting_yard'
-require '../lib/binary_tree_builder'
+require './lib/binary_tree_builder'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
