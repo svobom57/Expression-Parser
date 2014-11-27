@@ -1,6 +1,6 @@
 require './spec/spec_helper'
 
-describe 'Simple parsing' do
+describe TokenParser do
   let(:parser) { TokenParser.new }
 
   def returns(string, tokens)
