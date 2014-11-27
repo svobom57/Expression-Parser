@@ -26,9 +26,8 @@ class ShuntingYard
 						output << pop
 					end
 				else
-					if Operator.factory(token).nil?
-						output << token
-					else
+					begin
+						Operator.factory!(token)
 						loop do
 							length = stack.length
 							if length == 0 || stack[length-1] == '('
@@ -36,13 +35,15 @@ class ShuntingYard
 								break
 							end
 							# Token has higher priority than top of stack
-							if Operator.precedence(token) < Operator.precedence(stack[length-1])
+							if Operator.precedence!(token) < Operator.precedence!(stack[length-1])
 								stack << token
 								break
 							else
 								output << stack.pop
 							end
 						end
+					rescue
+						output << token
 					end
 			end
 		end
