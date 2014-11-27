@@ -1,7 +1,5 @@
-class And
-
-	include Arity2Operators
-
+class And < Arity2Operators
+	Operator.register('&&', And, 13)
 	attr_reader :left, :right
 
 end

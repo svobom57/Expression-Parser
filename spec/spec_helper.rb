@@ -1,6 +1,8 @@
+require './lib/Expressions/operator'
+require './lib/Expressions/arity1_operators'
+require './lib/Expressions/arity2_operators'
 require './lib/token_parser'
 require './lib/shunting_yard'
-require './lib/Expressions/arity2_operators'
 require './lib/Expressions/equal'
 require './lib/Expressions/greater_than'
 require './lib/Expressions/less_than'
@@ -8,33 +10,32 @@ require './lib/Expressions/greater_than_equal'
 require './lib/Expressions/less_than_equal'
 require './lib/Expressions/and'
 require './lib/Expressions/or'
-require './lib/Expressions/arity1_operators'
 require './lib/Expressions/unary_minus'
 require './lib/abstract_syntax_tree_builder'
 
 RSpec.configure do |config|
-  # rspec-expectations config goes here. You can use an alternate
-  # assertion/expectation library such as wrong or the stdlib/minitest
-  # assertions if you prefer.
-  config.expect_with :rspec do |expectations|
-    # This option will default to `true` in RSpec 4. It makes the `description`
-    # and `failure_message` of custom matchers include text for helper methods
-    # defined using `chain`, e.g.:
-    # be_bigger_than(2).and_smaller_than(4).description
-    #   # => "be bigger than 2 and smaller than 4"
-    # ...rather than:
-    #   # => "be bigger than 2"
-    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
-  end
+	# rspec-expectations config goes here. You can use an alternate
+	# assertion/expectation library such as wrong or the stdlib/minitest
+	# assertions if you prefer.
+	config.expect_with :rspec do |expectations|
+		# This option will default to `true` in RSpec 4. It makes the `description`
+		# and `failure_message` of custom matchers include text for helper methods
+		# defined using `chain`, e.g.:
+		# be_bigger_than(2).and_smaller_than(4).description
+		#   # => "be bigger than 2 and smaller than 4"
+		# ...rather than:
+		#   # => "be bigger than 2"
+		expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+	end
 
-  # rspec-mocks config goes here. You can use an alternate test double
-  # library (such as bogus or mocha) by changing the `mock_with` option here.
-  config.mock_with :rspec do |mocks|
-    # Prevents you from mocking or stubbing a method that does not exist on
-    # a real object. This is generally recommended, and will default to
-    # `true` in RSpec 4.
-    mocks.verify_partial_doubles = true
-  end
+	# rspec-mocks config goes here. You can use an alternate test double
+	# library (such as bogus or mocha) by changing the `mock_with` option here.
+	config.mock_with :rspec do |mocks|
+		# Prevents you from mocking or stubbing a method that does not exist on
+		# a real object. This is generally recommended, and will default to
+		# `true` in RSpec 4.
+		mocks.verify_partial_doubles = true
+	end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

@@ -1,4 +1,4 @@
-module Arity2Operators
+class Arity2Operators < Operator
 
 	ARITY = 2
 

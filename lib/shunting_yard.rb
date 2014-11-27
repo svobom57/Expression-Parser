@@ -1,20 +1,5 @@
 class ShuntingYard
 
-	:tokens
-
-	OPERATORS = {
-			:'-' => 3, # unary minus
-			:'>' => 8,
-			:'>=' => 8,
-			:'<' => 8,
-			:'<=' => 8,
-			:'=' => 9,
-			:'&&' => 13,
-			:'||' => 14,
-	}.freeze
-	private_constant :OPERATORS
-
-
 	def initialize(tokens)
 		raise ArgumentError.new("Expected array: Got #{tokens.class}") unless tokens.is_a?(Array)
 		@tokens = tokens
@@ -41,7 +26,9 @@ class ShuntingYard
 						output << pop
 					end
 				else
-					if OPERATORS.key?(token.intern)
+					if Operator.factory(token).nil?
+						output << token
+					else
 						loop do
 							length = stack.length
 							if length == 0 || stack[length-1] == '('
@@ -49,15 +36,13 @@ class ShuntingYard
 								break
 							end
 							# Token has higher priority than top of stack
-							if OPERATORS[token.intern] < OPERATORS[stack[length-1].intern]
+							if Operator.precedence(token) < Operator.precedence(stack[length-1])
 								stack << token
 								break
 							else
 								output << stack.pop
 							end
 						end
-					else
-						output << token
 					end
 			end
 		end
