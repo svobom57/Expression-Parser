@@ -1,5 +1,15 @@
 require './lib/token_parser'
 require './lib/shunting_yard'
+require './lib/Expressions/arity2_operators'
+require './lib/Expressions/equal'
+require './lib/Expressions/greater_than'
+require './lib/Expressions/less_than'
+require './lib/Expressions/greater_than_equal'
+require './lib/Expressions/less_than_equal'
+require './lib/Expressions/and'
+require './lib/Expressions/or'
+require './lib/Expressions/arity1_operators'
+require './lib/Expressions/unary_minus'
 require './lib/binary_tree_builder'
 
 RSpec.configure do |config|
