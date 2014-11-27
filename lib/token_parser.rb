@@ -1,7 +1,22 @@
 class TokenParser
 
   def parse(input)
-    input.scan(/(>=)|([a-z]+)|([>])|([0-9]+)|([=])+|([(])+|([)])|([<])|([&]+)+|([|]+)+/).flatten.compact
+    input.scan(/^<
+                    |(>=)|
+                    (<=)|
+                    (!=)|
+                    ([a-zA-Záäéëěíóöôúůüýčďňřšťžĺľ]+)|
+                    (=)|
+                    (>)|
+                    (<)|
+                    (\d+)|
+                    (\()|
+                    (\))|
+                    (&&)|
+                    (\|\|)|
+                  >+$/x)
+        .flatten
+        .compact
   end
 
 end
