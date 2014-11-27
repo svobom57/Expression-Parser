@@ -7,20 +7,20 @@ LEFT_BRACKET = 2
 RIGHT_BRACKET = 3
 # Operators and their precedence. The higher the number the lower the priority
 operators = {
-		'-' => 3, # unary minus
-		'>' => 8,
-		'>=' => 8,
-		'<' => 8,
-		'<=' => 8,
-		'=' => 9,
-		'&&' => 13,
-		'||' => 14,
-}
+		:'-' => 3, # unary minus
+		:'>' => 8,
+		:'>=' => 8,
+		:'<' => 8,
+		:'<=' => 8,
+		:'=' => 9,
+		:'&&' => 13,
+		:'||' => 14,
+}.freeze
 #expression = ' material = drevo && ( cena>= 180 || cena <= 250) '.strip.gsub(/[ ]/, '')
 #expression = ' ()((cena = -150))()'.strip.gsub(/[ ]/, '')
-#expression = '-A = 150 || B && C'.strip.gsub(/[ ]/, '')
-expression = '(A || -B) && C'.strip.gsub(/[ ]/, '')
-input = {}
+expression = '-A = 150 || B && C'.strip.gsub(/[ ]/, '')
+#expression = '(A || -B) && C'.strip.gsub(/[ ]/, '')
+input = []
 start = 0
 i = 0
 add_operand = false
@@ -31,67 +31,48 @@ while i <= expression.length - 1
 		# There might be the situation where operator is followed by bracket, in that case we don't want to add operand
 		if add_operand
 			operand = expression[start, i-start] #+1 included in "i"
-			input[operand] = OPERAND
+			input << operand
 			add_operand = false
 		end
 		start = i+1
 		# Checking whether there is a longer operator coming
 		# Correctly this should be done by iteration from LONGEST_OP_LENGTH.downto(1)
-		if operators.has_key?(expression[i, LONGEST_OP_LENGTH])
+		if operators.has_key?(expression[i, LONGEST_OP_LENGTH].intern)
 			operator = expression[i, LONGEST_OP_LENGTH]
-			input[operator] = OPERATOR
+			input << operator
 			i += 1
 			start += 1
 			# This is either single char operator or left or right bracket
 		else
 			operator = expression[i]
 			if operator == '('
-				input[operator] = LEFT_BRACKET
+				input << operator
 			elsif operator == ')'
-				input[operator] = RIGHT_BRACKET
+				input << operator
 			else
-				input[operator] = OPERATOR
+				raise("Unknown operator: #{operator}") unless operators.has_key?(operator.intern)
+				input << operator
 			end
 		end
-
 		# expression ends with operand
 	elsif expression.length - 1 == i
 		operand = expression[start, i-start+1]
-		input[operand] = OPERAND
+		input << operand
 	else
 		add_operand = true
 	end
 	i += 1
 end
-p input
 # Performs Shunting-yard algorithm
 output = []
 stack = []
 bracket_sum = 0
-input.each do |token, definition|
-	case definition
-		when OPERAND
-			output << token
-		when OPERATOR
-			raise("Unknown operator: #{token}") unless operators.has_key?(token)
-			while true
-				length = stack.length
-				if length == 0 || stack[length-1] == '('
-					stack << token
-					break
-				end
-				# Token has higher priority than top of stack
-				if operators[token] < operators[stack[length-1]]
-					stack << token
-					break
-				else
-					output << stack.pop
-				end
-			end
-		when LEFT_BRACKET
+input.each do |token|
+	case token
+		when '('
 			stack << token
 			bracket_sum += 1
-		when RIGHT_BRACKET
+		when ')'
 			bracket_sum -= 1
 			raise('Right parentheses mismatch') if  bracket_sum < 0
 			while stack.length > 0
@@ -102,7 +83,24 @@ input.each do |token, definition|
 				output << pop
 			end
 		else
-			raise('Token not defined') # This shouldn't ever happen
+			if operators.has_key?(token.intern)
+				loop do
+					length = stack.length
+					if length == 0 || stack[length-1] == '('
+						stack << token
+						break
+					end
+					# Token has higher priority than top of stack
+					if operators[token.intern] < operators[stack[length-1].intern]
+						stack << token
+						break
+					else
+						output << stack.pop
+					end
+				end
+			else
+				output << token
+			end
 	end
 end
 raise('Left parentheses mismatch') if bracket_sum > 0
