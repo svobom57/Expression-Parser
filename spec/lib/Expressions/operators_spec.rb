@@ -7,7 +7,7 @@ describe Operator do
   end
 
   it 'unary minus on string to SQL' do
-    expect{UnaryMinus.new('ahoj').to_sql}.to raise_error
+    expect{UnaryMinus.new('ahoj').to_sql}.to raise_error(ArgumentError)
   end
 
 end
