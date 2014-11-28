@@ -13,4 +13,9 @@ class Arity1Operators < Operator
 
   alias :equal? :==
 
+  def to_sql
+    if self.class == UnaryMinus
+      -operand.to_i
+    end
+  end
 end
