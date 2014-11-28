@@ -15,8 +15,8 @@ class TokenParser
                     (&&)|
                     (\|\|)|
                   >+$/x)
-        .flatten
-        .compact
+    .flatten
+    .compact
   end
 
 end

@@ -1,3 +1,3 @@
 class LessThan < Arity2Operators
-	Operator.register('<', LessThan, 8)
+  Operator.register('<', LessThan, 8)
 end
