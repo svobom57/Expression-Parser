@@ -1,5 +1,6 @@
 class Arity1Operators < Operator
 
+	attr_reader :operand
 	ARITY = 1
 
 	def ==(object)

@@ -1,5 +1,6 @@
 class Arity2Operators < Operator
 
+	attr_reader :left, :right
 	ARITY = 2
 
 	def initialize(left, right)
