@@ -15,6 +15,8 @@ class Arity1Operators < Operator
 
   def to_sql
     if self.class == UnaryMinus
+      operand = @operand
+      raise ArgumentError.new("#{operand} is not a number") if operand !~ /^\d+$/
       -operand.to_i
     end
   end
