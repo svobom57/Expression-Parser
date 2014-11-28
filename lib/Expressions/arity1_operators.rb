@@ -14,7 +14,7 @@ class Arity1Operators < Operator
   alias :equal? :==
 
   def to_sql
-    if self.class == UnaryMinus
+    if self.is_a? UnaryMinus
       operand = @operand
       raise ArgumentError.new("#{operand} is not a number") if operand !~ /^\d+$/
       -operand.to_i
