@@ -8,10 +8,10 @@ class Arity2Operators < Operator
     @right = right
   end
 
-  def ==(object)
-    object.class == self.class && object.left == @left && object.right == @right
+  def ==(other)
+    other.class == self.class && other.left == @left && other.right == @right
   end
 
-  alias :equal? :==
+  alias_method :equal?, :==
 
 end
