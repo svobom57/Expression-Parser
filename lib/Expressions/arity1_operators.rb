@@ -8,7 +8,7 @@ class Arity1Operators < Operator
   end
 
   def initialize(operand)
-    @operand = operand
+    @operand = (operand.is_a?(Operator)) ? operand : ValueExpression.new(operand)
   end
 
   alias_method :equal?, :==
