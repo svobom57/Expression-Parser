@@ -2,12 +2,23 @@ require './spec/spec_helper'
 
 describe Operator do
 
-  it 'unary minus on int to SQL' do
-    expect(UnaryMinus.new('180').to_sql).to be(-180)
+  describe UnaryMinus do
+    it 'unary minus on int to SQL' do
+      expect(UnaryMinus.new('180').to_sql).to be(-180)
+    end
+
+    it 'unary minus on string to SQL' do
+      expect { UnaryMinus.new('ahoj').to_sql }.to raise_error(ArgumentError)
+    end
   end
 
-  it 'unary minus on string to SQL' do
-    expect{UnaryMinus.new('ahoj').to_sql}.to raise_error(ArgumentError)
+  describe Equal do
+
+    it 'simple case' do
+      expect(Equal.new('price', '180').to_sql).to eq '(price = 180)'
+    end
+
   end
+
 
 end
