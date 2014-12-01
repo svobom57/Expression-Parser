@@ -14,7 +14,7 @@ You can use Expression-Parser for:
   ```
   Variable `tokens` will be array of tokens:
    ```ruby
-  %w(material = wood && ( price > 180 || price <= 250)
+  %w{material = wood && ( price > 180 || price <= 250 )}
   ```
   
 2. Converting tokens into postfix notation:
@@ -25,7 +25,7 @@ You can use Expression-Parser for:
   ```
   Variable `postfix` will be array of tokens in postfix notation:
   ```ruby
-  %w(material wood = price 180 > price 250 <= || &&)
+  %w{material wood = price 180 > price 250 <= || &&}
    ```
    
 3. Building Abstract Syntax Tree:
