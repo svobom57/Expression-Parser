@@ -69,7 +69,7 @@ operator | description
 **<=**   | *Less Than Equal*
 **&&**   | *Logical AND*
 **\|\|**   | *Logical OR*
-**-**  | *Unary minus*
+**-**  | *Unary Minus*
 
 The rest of passed expression is considered as an operand i.e. either variable or a number
 
