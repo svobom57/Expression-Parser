@@ -1,6 +1,7 @@
 require './lib/Expressions/operator'
 require './lib/Expressions/arity1_operators'
 require './lib/Expressions/arity2_operators'
+require './lib/Expressions/value_expression'
 require './lib/token_parser'
 require './lib/shunting_yard'
 require './lib/Expressions/equal'

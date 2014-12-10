@@ -8,16 +8,9 @@ class Arity1Operators < Operator
   end
 
   def initialize(operand)
-    @operand = operand
+    @operand = (operand.is_a?(Operator)) ? operand : ValueExpression.new(operand)
   end
 
   alias_method :equal?, :==
 
-  def to_sql
-    if self.is_a? UnaryMinus
-      operand = @operand
-      fail(ArgumentError, ("#{operand} is not a number")) if operand !~ /^\d+$/
-      -operand.to_i
-    end
-  end
 end

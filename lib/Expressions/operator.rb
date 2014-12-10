@@ -18,4 +18,9 @@ class Operator
   def self.register(operator_symbol, class_name, precedence)
     OPERATORS[operator_symbol] = { class_name: class_name, precedence: precedence }
   end
+
+  def to_sql
+    raise NotImplementedError
+  end
+
 end
